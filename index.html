@@ -1,13 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symptrack — AI Symptom Triage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symptrack — AI Symptom Triage</title>
+<style>
+  :root{
+    --er:#FF5A5A;
+    --doc:#FFA53D;
+    --self:#4CAF3E;
+    --ink:#1A1A1A;
+    --paper:#FBFAF7;
+    --muted:#6B6B6B;
+    --line:#EAE7E0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* top bar */
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 24px;max-width:960px;margin:0 auto;
+  }
+  header img{height:42px}
+  .tagline{color:var(--muted);font-size:.9rem}
+
+  /* the triage color strip */
+  .strip{height:6px;display:flex}
+  .strip span{flex:1}
+  .strip .a{background:var(--er)}
+  .strip .b{background:var(--doc)}
+  .strip .c{background:var(--self)}
+
+  /* hero */
+  .hero{padding:72px 0 56px;text-align:center}
+  .hero h1{
+    font-size:3rem;line-height:1.1;letter-spacing:-1px;margin-bottom:18px;
+  }
+  .hero p{
+    font-size:1.15rem;color:var(--muted);max-width:600px;margin:0 auto 32px;
+  }
+  .btn{
+    display:inline-block;background:var(--ink);color:#fff;
+    padding:14px 28px;border-radius:8px;text-decoration:none;
+    font-weight:600;font-size:1rem;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);margin-left:12px}
+
+  /* triage cards */
+  .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:56px 0}
+  .cat{border-radius:12px;padding:24px;color:#fff}
+  .cat h3{font-size:1.2rem;margin-bottom:6px}
+  .cat p{font-size:.9rem;opacity:.95}
+  .cat.er{background:var(--er)}
+  .cat.doc{background:var(--doc)}
+  .cat.self{background:var(--self)}
+
+  /* sections */
+  section{padding:48px 0;border-top:1px solid var(--line)}
+  section h2{font-size:1.8rem;margin-bottom:24px;letter-spacing:-.5px}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+  .step .n{
+    width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:12px;
+  }
+  .step h4{margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.92rem}
+
+  /* results table */
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--ink);color:#fff;font-weight:600;font-size:.9rem}
+  td{font-size:.95rem}
+  tr:last-child td{border-bottom:none}
+  .best{background:#F3FBF2;font-weight:600}
+
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center}
+  .metric .v{font-size:2rem;font-weight:700;color:var(--self)}
+  .metric .l{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+  footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)}
+  footer a{color:var(--ink)}
+  .disc{background:#FFF8E6;border:1px solid #F0E2B8;border-radius:10px;padding:16px;font-size:.9rem;color:#7a6a2f;margin-top:32px}
+
+  @media(max-width:680px){
+    .hero h1{font-size:2.1rem}
+    .cats,.steps,.metrics{grid-template-columns:1fr}
+    .btn.ghost{margin-left:0;margin-top:12px}
+  }
+</style>
 </head>
 <body>
-  <h1>Symptrack</h1>
-  <p>An AI-powered symptom triage tool that classifies symptoms into ER, Doctor, or Self-care.</p>
-  <a href="رابط_الأداة_على_hugging_face">Try it Live</a>
+
+<div class="strip"><span class="a"></span><span class="b"></span><span class="c"></span></div>
+
+<header>
+  <img src="logo.png" alt="Symptrack logo">
+  <span class="tagline">Clinical triage guidance, not a diagnosis</span>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border:none">
+    <h1>Know your next step, faster.</h1>
+    <p>Describe how you feel in your own words. Symptrack reads your symptoms and points you toward emergency care, a doctor visit, or self-care — so you're not left guessing.</p>
+    <a class="btn" href="REPLACE_WITH_HUGGINGFACE_LINK">Try it live</a>
+    <a class="btn ghost" href="REPLACE_WITH_GITHUB_REPO_LINK">View the code</a>
+  </section>
+
+  <div class="cats">
+    <div class="cat er"><h3>Emergency Room</h3><p>Symptoms that may need immediate medical care.</p></div>
+    <div class="cat doc"><h3>Doctor</h3><p>Conditions that need attention but aren't emergencies.</p></div>
+    <div class="cat self"><h3>Self-care</h3><p>Mild issues that can be managed at home.</p></div>
+  </div>
+
+  <section>
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>Describe your symptoms</h4><p>Type how you feel in plain language, like a chat message.</p></div>
+      <div class="step"><div class="n">2</div><h4>Symptrack reads the pattern</h4><p>A fine-tuned ClinicalBERT model analyzes the description.</p></div>
+      <div class="step"><div class="n">3</div><h4>Get clear guidance</h4><p>Receive a triage category with a medical disclaimer.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Model performance</h2>
+    <div class="metrics">
+      <div class="metric"><div class="v">0.979</div><div class="l">Macro-F1</div></div>
+      <div class="metric"><div class="v">0.966</div><div class="l">ER Recall</div></div>
+      <div class="metric"><div class="v">0.017</div><div class="l">Calibration (ECE)</div></div>
+      <div class="metric"><div class="v">0.983</div><div class="l">Accuracy</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Model comparison</h2>
+    <table>
+      <tr><th>Model</th><th>Macro-F1</th><th>ER Recall</th></tr>
+      <tr><td>GRU (no embeddings)</td><td>0.255</td><td>0.000</td></tr>
+      <tr><td>GRU + GloVe</td><td>0.931</td><td>0.897</td></tr>
+      <tr><td>GRU + BioWordVec</td><td>0.926</td><td>0.931</td></tr>
+      <tr class="best"><td>ClinicalBERT</td><td>0.979</td><td>0.966</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>How we built it</h2>
+    <p style="color:var(--muted)">We mapped 24 disease labels into three triage categories using a CTAS-based protocol, fine-tuned ClinicalBERT with a weighted loss to handle class imbalance, and added a confidence threshold that defaults uncertain cases to the safest category. We compared ClinicalBERT against three GRU models to confirm that contextual, medically pre-trained language understanding was the key to reliable triage.</p>
+    <div class="disc">
+      <strong>Disclaimer:</strong> Symptrack is an academic research prototype. It provides triage guidance only and is not a medical diagnosis. Always consult a healthcare professional. In an emergency, call 997.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Built by Team AI-titans · Symptrack Capstone Project<br>
+  <a href="REPLACE_WITH_GITHUB_REPO_LINK">GitHub</a> ·
+  <a href="REPLACE_WITH_HUGGINGFACE_LINK">Live demo</a>
+</footer>
+
 </body>
 </html>
