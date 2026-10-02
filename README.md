@@ -1,6 +1,6 @@
 # Symptrack — AI Symptom Triage
 
-**🌐 Website:** https://roaa-thg.github.io/Symptrack/
+**🌐 Website:** https://roaa-thg.github.io/Symptrack/Symptrack.html
 
 Symptrack reads a patient's symptoms written in plain language and sorts them into one of three triage levels:
 
