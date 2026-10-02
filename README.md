@@ -10,8 +10,6 @@ Symptrack reads a patient's symptoms written in plain language and sorts them in
 
 It is built on a fine-tuned **ClinicalBERT** model, with a confidence threshold that defaults uncertain cases to the safest category (ER).
 
-> ⚠️ **Disclaimer:** Academic research prototype. Provides triage guidance only — not a medical diagnosis. Always consult a healthcare professional. In an emergency, call **997**.
-
 ---
 
 ## Tools & Libraries
@@ -68,17 +66,6 @@ ClinicalBERT won because contextual, medically pre-trained understanding handled
 | `config.json`, `inference_config.json` | Model + inference settings (threshold 0.65, default = ER) |
 | `requirements.txt` | Dependencies |
 | `Symptrack.html` | Landing page |
-
-> The trained model file (`model.safetensors`, ~413 MB) exceeds GitHub's 100 MB limit and is not stored here.
-
----
-
-## Run it locally
-
-```bash
-pip install -r requirements.txt
-python app.py
-```
 
 ---
 
