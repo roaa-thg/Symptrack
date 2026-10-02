@@ -29,7 +29,7 @@
     display:flex;align-items:center;justify-content:space-between;
     padding:20px 24px;max-width:960px;margin:0 auto;
   }
-  header img{height:42px}
+  header img{height:48px}
   .tagline{color:var(--muted);font-size:.9rem}
 
   /* the triage color strip */
@@ -67,6 +67,16 @@
   /* sections */
   section{padding:48px 0;border-top:1px solid var(--line)}
   section h2{font-size:1.8rem;margin-bottom:24px;letter-spacing:-.5px}
+
+  /* demo video */
+  .video-frame{
+    position:relative;width:100%;padding-top:56.25%;
+    border-radius:12px;overflow:hidden;border:1px solid var(--line);
+    background:#000;
+  }
+  .video-frame iframe{
+    position:absolute;top:0;left:0;width:100%;height:100%;border:0;
+  }
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
   .step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
@@ -106,7 +116,7 @@
 <div class="strip"><span class="a"></span><span class="b"></span><span class="c"></span></div>
 
 <header>
-  <img src="logo.png" alt="Symptrack logo">
+  <img src="https://raw.githubusercontent.com/roaa-thg/Symptrack/main/Symptrack-logo.png" alt="Symptrack logo">
   <span class="tagline">Clinical triage guidance, not a diagnosis</span>
 </header>
 
@@ -115,7 +125,7 @@
   <section class="hero" style="border:none">
     <h1>Know your next step, faster.</h1>
     <p>Describe how you feel in your own words. Symptrack reads your symptoms and points you toward emergency care, a doctor visit, or self-care — so you're not left guessing.</p>
-    <a class="btn" href="https://drive.google.com/file/d/1MDI0bBudiVbQzjkFHuAFmtFrwTxthDLu/view?usp=drive_link">See it</a>
+    <a class="btn" href="#demo">See it</a>
     <a class="btn ghost" href="https://github.com/roaa-thg/Symptrack">View the code</a>
   </section>
 
@@ -124,6 +134,16 @@
     <div class="cat doc"><h3>Doctor</h3><p>Conditions that need attention but aren't emergencies.</p></div>
     <div class="cat self"><h3>Self-care</h3><p>Mild issues that can be managed at home.</p></div>
   </div>
+
+  <section id="demo">
+    <h2>See it in action</h2>
+    <div class="video-frame">
+      <iframe src="https://drive.google.com/file/d/1MDI0bBudiVbQzjkFHuAFmtFrwTxthDLu/preview" allow="autoplay" allowfullscreen></iframe>
+    </div>
+    <p style="color:var(--muted);margin-top:14px">
+      Can't see the video? <a href="https://drive.google.com/file/d/1MDI0bBudiVbQzjkFHuAFmtFrwTxthDLu/view?usp=drive_link" style="color:var(--ink)">Open it in Google Drive</a>.
+    </p>
+  </section>
 
   <section>
     <h2>How it works</h2>
@@ -168,7 +188,7 @@
 <footer>
   Built by Team AI-titans · Symptrack Capstone Project<br>
   <a href="https://github.com/roaa-thg/Symptrack">GitHub</a> ·
-  <a href="https://drive.google.com/file/d/1MDI0bBudiVbQzjkFHuAFmtFrwTxthDLu/view?usp=drive_link">See it</a>
+  <a href="#demo">See it</a>
 </footer>
 
 </body>
